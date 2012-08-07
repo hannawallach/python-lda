@@ -1,5 +1,5 @@
 from alphabet import *
-from numpy import *
+from numpy import array, ndarray
 import cPickle as pickle
 
 class Document(object):

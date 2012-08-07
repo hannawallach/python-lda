@@ -1,13 +1,12 @@
-import argparse
+from argparse import ArgumentParser
 from corpus import *
-from numpy import *
 from lda import *
 
 def main():
 
     # parse command-line arguments
 
-    p = argparse.ArgumentParser()
+    p = ArgumentParser()
 
     p.add_argument('input_file', metavar='input-file', help='file containing preprocessed data')
     p.add_argument('output_dir', metavar='output-dir', help='output directory')

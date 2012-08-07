@@ -1,8 +1,7 @@
-from numpy import zeros, argsort, sum, random
 from corpus import *
-from sys import stdout
 from interactive_plot import *
-import os
+from numpy import argsort, cumsum, log, ones, random, searchsorted, sum, zeros
+import os, sys
 
 class LDA(object):
 
@@ -113,7 +112,7 @@ class LDA(object):
 
         for s in xrange(1, self.S+1):
 
-            stdout.write('.')
+            sys.stdout.write('.')
 
             if s % 10 == 0:
 

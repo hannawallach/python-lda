@@ -70,10 +70,10 @@ class LDA(object):
 
         self.dirname = dirname
 
-        assert not os.listdir(dirname), 'Output directory must be empty.'
-
         if not os.path.exists(dirname):
             os.makedirs(dirname)
+
+        assert not os.listdir(dirname), 'Output directory must be empty.'
 
         print '# documents =', D
         print '# tokens =', N

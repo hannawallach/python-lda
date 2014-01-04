@@ -2,26 +2,21 @@ import argparse, csv, re
 from corpus import *
 from numpy import *
 
-def create_stopword_list(stopword_file):
+def create_stopword_list(f):
 
-    stopwords = []
+    if not f:
+        return set()
 
-    for word in open(stopword_file):
-        stopwords.append(word.strip())
+    if isinstance(f, basestring):
+        f = file(f)
 
-    return set(stopwords)
+    return set(word.strip() for word in f)
 
-def remove_stopwords(data, stopwords):
+def tokenize(data, stopwords=set()):
 
-    assert isinstance(data, list)
-    assert isinstance(stopwords, set)
+    tokens = re.findall('[a-z]+', data.lower())
 
-    return [x for x in data if x not in stopwords]
-
-def tokenize(data):
-
-    assert isinstance(data, basestring)
-    return re.findall('\w+', data.lower())
+    return [x for x in tokens if x not in stopwords]
 
 def main():
 
@@ -37,18 +32,14 @@ def main():
 
     # create stopword list
 
-    if args.remove_stopwords != None:
-        stopwords = create_stopword_list(args.remove_stopwords)
+    stopwords = create_stopword_list(args.remove_stopwords)
 
     # preprocess data
 
     corpus = Corpus()
 
     for name, label, data in csv.reader(open(args.input_file), delimiter='\t'):
-        if args.remove_stopwords != None:
-            corpus.add(name, remove_stopwords(tokenize(data), stopwords))
-        else:
-            corpus.add(name, tokenize(data))
+        corpus.add(name, tokenize(data, stopwords))
 
     print '# documents =', len(corpus)
     print '# tokens =', sum(len(doc) for doc in corpus)

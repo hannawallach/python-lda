@@ -5,6 +5,7 @@ from numpy import argmin, argsort, finfo, reshape, size, sum, unique, vstack, ze
 from utils import *
 from corpus import *
 
+
 def aggregate(regexp, col=-1, header=0):
 
     files = glob(regexp)
@@ -28,6 +29,7 @@ def aggregate(regexp, col=-1, header=0):
 
     return values
 
+
 def count_unique_values(values):
 
     tmp = zeros(len(values), dtype=int)
@@ -37,12 +39,14 @@ def count_unique_values(values):
 
     return tmp
 
+
 def get_empirical_phi(statefile):
 
     nwt = get_nwt(statefile)
     phi = nwt / (sum(nwt, 0).astype('float') + finfo('float').eps)
 
     return phi
+
 
 def get_empirical_theta(statefile):
 
@@ -51,12 +55,14 @@ def get_empirical_theta(statefile):
 
     return theta
 
+
 def get_nwt(statefile):
 
     w_idx = aggregate(statefile, col=2)
     t_idx = aggregate(statefile)
 
     return get_2d_counts(vstack((w_idx, t_idx)).T)
+
 
 def get_ntd(statefile):
 
@@ -65,17 +71,20 @@ def get_ntd(statefile):
 
     return get_2d_counts(vstack((t_idx, d_idx)).T)
 
+
 def get_nw(statefile):
 
     w_idx = aggregate(statefile, col=2)
 
     return get_1d_counts(w_idx)
 
+
 def get_nt(statefile):
 
     t_idx = aggregate(statefile)
 
     return get_1d_counts(t_idx)
+
 
 def get_1d_counts(data):
 
@@ -92,6 +101,7 @@ def get_1d_counts(data):
         counts[i] = tmp[i]
 
     return counts
+
 
 def get_2d_counts(data):
 
@@ -114,6 +124,7 @@ def get_2d_counts(data):
 
     return counts
 
+
 def align_topics(statefile1, statefile2):
 
     phi1 = get_empirical_phi(statefile1)
@@ -128,6 +139,7 @@ def align_topics(statefile1, statefile2):
             dist[i, j] = hellinger(phi1[:, i], phi2[:, j])
 
     return dist
+
 
 def get_corpus(statefile, header=0):
 

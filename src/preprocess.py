@@ -2,6 +2,7 @@ import argparse, csv, re
 from corpus import *
 from numpy import *
 
+
 def create_stopword_list(f):
 
     if not f:
@@ -12,11 +13,13 @@ def create_stopword_list(f):
 
     return set(word.strip() for word in f)
 
+
 def tokenize(data, stopwords=set()):
 
     tokens = re.findall('[a-z]+', data.lower())
 
     return [x for x in tokens if x not in stopwords]
+
 
 def main():
 
@@ -47,6 +50,7 @@ def main():
 
     if args.output_file:
         corpus.save(args.output_file)
+
 
 if __name__ == '__main__':
     main()

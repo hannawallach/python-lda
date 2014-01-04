@@ -2,6 +2,7 @@ from alphabet import *
 from numpy import array, ndarray
 import cPickle as pickle
 
+
 class Document(object):
 
     def __init__(self, corpus, name, tokens):
@@ -19,6 +20,7 @@ class Document(object):
 
     def plaintext(self):
         return ' '.join([self.corpus.alphabet.lookup(x) for x in self.tokens])
+
 
 class Corpus(object):
 

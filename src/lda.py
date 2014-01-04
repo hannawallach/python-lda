@@ -3,6 +3,7 @@ from interactive_plot import *
 from numpy import argsort, cumsum, log, ones, random, searchsorted, sum, zeros
 import os, sys
 
+
 class LDA(object):
 
     def log_prob(self):

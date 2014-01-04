@@ -1,5 +1,6 @@
 from matplotlib import pyplot
 
+
 class InteractivePlot(object):
 
     def __init__(self, xlabel, ylabel):
@@ -28,6 +29,7 @@ class InteractivePlot(object):
         pyplot.ylabel(self.ylabel)
 
         pyplot.draw()
+
 
 if __name__ == '__main__':
 
